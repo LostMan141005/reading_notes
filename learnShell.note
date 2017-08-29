@@ -723,5 +723,47 @@ zip commands:
 gpg -c filename                             # 加密
 gpg *.gpg                                   # 解密
 
-    
+ifconfig commands:
+    ifconfig eth0 192.168.0.122 netmask 255.255.255.0 # 设置 ip 和 子网掩码
+    ifconfig eth0 hw ether 00:0c:29:a2:32:39          # 设置 MAC 地址
+host and nslookup commands:
+    host baidu.com                                    # 解析某个域名的所有 ip 地址
+    nslookup baidu.com                                # ...
+route commands:
+    route/route -n                                    # 显示路由表
+    route ad default gw 192.168.0.1 eth0              # 添加网关
+    traceroute baidu.com                              
 
+other commands:
+	who
+		sdgl     tty7         2017-08-29 08:20 (:0)
+	w
+		16:58:31 up  8:15,  1 user,  load average: 0.24, 0.46, 0.46
+		USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+		sdgl     tty7     :0               08:20    8:38m  9:02   0.76s /sbin/upstart --user
+	uptime
+		17:00:30 up  8:17,  1 user,  load average: 0.58, 0.60, 0.52    # 查看系统上电时间
+
+ps commands:
+    ps -C command           # list the command ID
+    ps -C command -o pid=
+    ps -eo comm,pcpu        # pcpu pid ppid pmem comm cmd user nice time etime tty euid stat 
+
+kill commands:
+    kill -l                 # list all singal
+    kill -s SINGAL pid      # send singal to the pid progress
+
+trap commands:
+    trap 'fuction_name' SINGAL LIST         # 将某个函数分配给一个信号，当信号发生时执行函数 
+		#!/bin/bash
+		#filename: sighandler.sh
+		function handler()
+		{
+		echo Hey, received signal : SIGINT
+		}
+		echo my process ID is $$
+		trap handler SIGINT
+		while true;
+		do
+		sleep 1;
+		done
