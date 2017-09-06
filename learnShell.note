@@ -767,3 +767,18 @@ trap commands:
 		do
 		sleep 1;
 		done
+
+case commands:
+    case $var in
+        pattern1) 
+            commands;;
+        pattern2)
+            commands;;
+        pattern3)
+            commands;
+        .
+        .
+        .
+        *) default_commands;;
+    esac
+    
